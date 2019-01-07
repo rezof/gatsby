@@ -33,7 +33,10 @@ function addEsmImport(j, root, tag) {
 
   if (!existingImport.length) {
     const first = root.find(j.Program).get(`body`, 0)
-    const comments = first.node.comments.splice(0)
+    let comments
+    if(first.node.comments){
+      comments = first.node.comments.splice(0)
+    }
     const importStatement = j.importDeclaration(
       [j.importSpecifier(j.identifier(IMPORT_NAME))],
       j.literal(MODULE_NAME)
